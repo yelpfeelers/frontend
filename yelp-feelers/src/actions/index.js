@@ -11,9 +11,10 @@ export const POST_SIGNUP_REQUEST = 'POST_SIGNUP_REQUEST';
 export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
 
 export const locationSearch = location => dispatch => {
+    console.log(location)
     dispatch({ type: POST_LOCATION_REQUEST });
     axios
-        .post('https://yelpfeelers.herokuapp.com/', { location })
+        .get(`https://yelpfeelers.herokuapp.com/api/yelp?location=${location}&term=taco`)
         .then(res => {
             console.log(res);
             // dispatch({ type: POST_LOCATION_SUCCESS });
@@ -28,7 +29,7 @@ export const loginUser = creds => dispatch => {
     console.log('login', creds)
     dispatch({ type: POST_LOGIN_REQUEST });
     axios
-        .post('https://yelpfeelers.herokuapp.com/api/login', creds)
+        .post('https://yelpfeelers.herokuapp.com/api/users/login', creds)
         .then(res => {
             console.log(res);
             // dispatch({ type: POST_LOGIN_SUCCESS });
@@ -43,7 +44,7 @@ export const signupUser = creds => dispatch => {
     console.log('signup', creds);
     dispatch({ type: POST_SIGNUP_REQUEST });
     axios
-        .post('https://yelpfeelers.herokuapp.com/api/register', creds)
+        .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
         .then(res => {
             console.log(res);
             // dispatch({ type: POST_SIGNUP_SUCCESS });

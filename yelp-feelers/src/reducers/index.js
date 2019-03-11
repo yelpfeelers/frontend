@@ -31,7 +31,7 @@ const initialState = {
             reviews: '5 Stars'
         }
     ],
-    isAuth: true
+    isAuth: false
 }
 
 export default (state = initialState, action) => {

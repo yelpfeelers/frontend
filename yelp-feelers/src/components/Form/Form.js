@@ -36,12 +36,14 @@ class Form extends Component {
           onChange={this.handleChange}
           placeholder="Username"
           type="text"
+          value={this.state.username}
         />
         <input
           name="password"
           onChange={this.handleChange}
           placeholder="Password."
           type="text"
+          value={this.state.password}
         />
         <button>{this.state.login ? 'Login' : 'Signup' }</button>
       </form>
