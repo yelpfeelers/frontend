@@ -11,18 +11,16 @@ export const POST_SIGNUP_REQUEST = 'POST_SIGNUP_REQUEST';
 export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
 
 export const locationSearch = location => dispatch => {
-    console.log(location)
     dispatch({ type: POST_LOCATION_REQUEST });
-    axios
-        .get(`https://yelpfeelers.herokuapp.com/api/yelp?location=${location}&term=taco`)
-        .then(res => {
-            console.log(res);
-            // dispatch({ type: POST_LOCATION_SUCCESS });
-        })
-        .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_LOCATION_FAILURE });
-        });
+    return axios
+            .get(`https://yelpfeelers.herokuapp.com/api/yelp?location=${location}&term=taco`)
+            .then(res => {
+                console.log(res)
+                dispatch({ type: POST_LOCATION_SUCCESS, payload: res.data });
+            })
+            .catch(err => {
+                dispatch({ type: POST_LOCATION_FAILURE, payload: err.message });
+            });
 }
 
 export const loginUser = creds => dispatch => {
