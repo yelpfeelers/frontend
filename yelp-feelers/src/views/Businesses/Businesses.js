@@ -9,7 +9,7 @@ const Businesses = props => (
         <Header />
         <main>
             {
-                props.businesses.map(business => <Business business={business} />)
+                props.businesses.map(business => <Business key={business.id} business={business} />)
             }
         </main>
    </>
