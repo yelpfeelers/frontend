@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
+import Review from '../../components/Review/Review';
 import { fetchReviews } from '../../actions';
 
 class Business extends Component {
@@ -25,7 +27,12 @@ class Business extends Component {
             <>
                 <Header />
                 <main>
-                    
+                    <BusinessComponent business={this.props.business} />
+                    <section>
+                        {
+                            this.state.reviews.map(review => <Review review={review} />)
+                        }
+                    </section>
                 </main>
             </>
         )
