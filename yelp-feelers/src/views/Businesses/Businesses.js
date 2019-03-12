@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Business from '../../components/Business/Business';
-
 import Header from '../../components/Header/Header';
+
 
 const Businesses = props => (
     <>

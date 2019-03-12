@@ -1,7 +1,7 @@
 import {
-    POST_LOCATION_FAILURE,
-    POST_LOCATION_REQUEST,
-    POST_LOCATION_SUCCESS,
+    GET_LOCATION_FAILURE,
+    GET_LOCATION_REQUEST,
+    GET_LOCATION_SUCCESS,
     POST_LOGIN_FAILURE,
     POST_LOGIN_REQUEST,
     POST_LOGIN_SUCCESS,
@@ -38,17 +38,17 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case POST_LOCATION_FAILURE:
+        case GET_LOCATION_FAILURE:
             return {
                 ...state, error: action.payload, searchingLocation: false
             }
-        case POST_LOCATION_REQUEST:
+        case GET_LOCATION_REQUEST:
             return {
                 ...state, error: null, searchingLocation: true
             }
-        case POST_LOCATION_SUCCESS:
+        case GET_LOCATION_SUCCESS:
             return {
-                ...state, businesses: action.payload, searchingLocation: false
+                ...state, businesses: action.payload, error: null, searchingLocation: false
             }
         case POST_LOGIN_FAILURE:
             return state;

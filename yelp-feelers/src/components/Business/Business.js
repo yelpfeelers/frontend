@@ -24,7 +24,6 @@ const Reviews = styled.div`
 
 const Section = styled.section`
 `;
-
 const SubTitle = styled.h2`
 `;
 
