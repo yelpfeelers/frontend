@@ -1,5 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchBookmarks } from '../../actions';
+import Header from '../../components/Header/Header';
 
-const Bookmarks = props => <div></div>
+class Bookmarks extends Component {
+    componentDidMount() {
+        this.props.fetchBookmarks()
+    }
 
-export default Bookmarks;
+    render() {
+        return (
+            <>
+                <Header />
+                <main>
+
+                </main>
+            </>
+        )
+    }
+}
+
+export default connect(null, { fetchBookmarks })(Bookmarks);

@@ -1,115 +1,102 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
-import img from '../../assets/walking-light.svg';
-
-const Div = styled.div`
-    width: 100%;
-`;
-
-const Grid = styled.article`
-    display: flex;
-    padding: 10px;
-`;
+import people from '../../assets/users-light.svg';
+import clock from '../../assets/clock-light.svg';
+import star from '../../assets/star-light.svg';
+import walk from '../../assets/walking-light.svg';
 
 const Flex = styled.section`
     display: flex;
-    justify-content: space-between;
-    background: #e6e6e6;
-    padding: 10px 5px;
-    border-bottom: 1px solid black;
-
-    div {
-        text-align: center;
-        width: 80px;
-    }
-`;
-
-const Header = styled.header`
-    display: flex;
-    align-items: center;
-`;
-
-const Icon = styled.div`
-    height: 20px;
-    width: 20px;
-    align-content: center;
-    background: url(${img}) center no-repeat;
+    justify-content: ${props => props.justify};
+    margin: auto;
+    padding-bottom: ${props => props.bottom};
+    max-width: ${props => props.maxWidth};
 `;
 
 const Image = styled.img`
-    height: 40px;
-    width: 40px;
-    border-radius: 100%;
+    height: 100px;
+    width: 100px;
 `;
 
-const Reviews = styled.div`
-    height: 40px;
-    width: 40px;
-    background: green;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 25px;
-    padding-top: 5px;
-    color: white;
+const Grid = styled.div`
+    background-color: #ffffff;
+    border-bottom: 1px solid #cddae2;
+    margin: auto;
+    margin-top: 30px;
+    max-width: 500px;
+    width: 90%;
+    padding: 10px 10px 0px 10px;
 `;
 
 const Section = styled.section`
-    padding-bottom: 10px;
-
-    div {
-        display: flex;
-        align-items: center;
-    }
-`;
-
-const SubTitle = styled.h2`
-    line-height: 1.2;
+    padding: 0 10px;
 `;
 
 const Title = styled.h1`
     color: black;
-    margin-left: 15px;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    padding-top: 10px;
+`;
+
+const SubTitle = styled.h2`
+    font-size: 1.4rem
+    line-height: 1.3;
 `;
 
 
 
+const Div = styled.div`
+    text-align: center;
+    width: 50px;
+`;
+
+const Icon = styled.div`
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    background: ${props => `url(${props.icon}) center no-repeat`};
+`;
+
+const IconText = styled.p`
+    font-size: 1.2rem
+    padding-top: 10px;
+`;
+
+
 const Business = props => (
     <Grid>
-        <Div>
+        <Flex justify={'flex-start'} bottom={'20px'}>
+            <Link to={`/businesses/${props.business.id}`}>
+                <Image src={props.business.image_url} />
+            </Link>
             <Section>
-                <Header>
-                    <Link to={`/businesses/${props.business.id}`}>
-                        <Image src={props.business.image_url} />
-                    </Link>
-                    <Link to={`/businesses/${props.business.id}`}>
-                        <Title>{props.business.name}</Title>
-                    </Link>
-                </Header>
-                <SubTitle>{props.business.location.address1}</SubTitle>
-                <SubTitle>{props.business.location.address2}</SubTitle>
-                <SubTitle>{props.business.location.address3}</SubTitle>
-                <SubTitle>{props.business.location.city}</SubTitle>
-                <Div>
-                    <Icon></Icon>
-                    <SubTitle>{props.business.display_phone}</SubTitle>
-                </Div>
+                <Link to={`/businesses/${props.business.id}`}>
+                    <Title>{props.business.name}</Title>
+                </Link>
+                <SubTitle>{Object.values(props.business.location.display_address).filter(x => x.length > 0).join(', ')}</SubTitle>
+                <SubTitle>{props.business.display_phone}</SubTitle>
             </Section>
-            <Flex>
-                <Div>
-                    <Icon></Icon>
-                    <SubTitle>5 minutes</SubTitle>
-                </Div>
-                <Div>
-                    <Reviews>{props.business.rating}/5</Reviews>
-                    <SubTitle>{props.business.review_count} Reviews</SubTitle>
-                </Div>
-                <Div>
-                    <Icon></Icon>
-                    <SubTitle>{props.business.is_closed ? 'Closed' : 'Open'}</SubTitle>
-                </Div>
-            </Flex>
-        </Div>
+        </Flex>
+        <Flex justify={'space-around'} maxWidth={'400px'} bottom={'10px'}>
+            <Div>
+                <Icon icon={walk} />
+                <IconText>5 mins</IconText>
+            </Div>
+            <Div>
+                <Icon icon={clock}></Icon>
+                <IconText>{props.business.is_closed ? 'Closed' : 'Open'}</IconText>
+            </Div>
+            <Div>
+                <Icon icon={people} />
+                <IconText>{props.business.review_count} Reviews</IconText>
+            </Div>
+            <Div>
+                <Icon icon={star}/>
+                <IconText>{props.business.rating} Star</IconText>
+            </Div>
+        </Flex>
     </Grid>
 )
 

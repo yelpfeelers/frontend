@@ -1,7 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { locationSearch } from '../../actions';
-import './Search.sass';
+import styled from 'styled-components';
+import './Search.scss';
+
+const StyledForm = styled.form`
+  width: 100%;
+`;
+
+const Input = styled.input`
+  border: 1px solid #cddae2;
+  border-radius: 10px;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Button = styled.button`
+  background-color: inherit;
+  border: 1px solid white;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
+  margin: auto;
+  margin-top: 10px;
+  width: 100px;
+
+  @media (min-width: 800px) {
+    border: 1px solid black;
+    color: black;
+  }
+`;
+
 
 class Search extends Component {
   constructor() {
@@ -26,17 +66,26 @@ class Search extends Component {
 
   render() {
     return (
-      <form
-        onSubmit={this.submit}
-      >
-        <input
-          name="location"
-          onChange={this.handleChange}
-          placeholder="Enter location..."
-          type="text"
-        />
-        <button>></button>
-      </form>
+      <main className="search-main">
+          <section className="search-form">
+              <div className="search-container">
+                  <div className="logo"></div>
+                  <StyledForm
+                    onSubmit={this.submit}
+                  >
+                    <Input
+                      name="location"
+                      onChange={this.handleChange}
+                      placeholder="Enter location..."
+                      type="text"
+                    />
+                    <Button>Search</Button>
+                  </StyledForm>
+              </div>
+
+          </section>
+          <section className="search-aside"></section>
+      </main>
     );
   }
 }
