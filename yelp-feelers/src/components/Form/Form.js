@@ -26,6 +26,14 @@ class Form extends Component {
     this.setState({ login: false, username: '', password: '' });
   }
 
+  toggleLogin = () => {
+    this.setState(state => {
+      return ({
+        login: !state.login
+      })
+    });
+  }
+
   render() {
     return (
       <form
@@ -46,6 +54,11 @@ class Form extends Component {
           value={this.state.password}
         />
         <button>{this.state.login ? 'Login' : 'Signup' }</button>
+        <p
+          onClick={this.toggleLogin}
+        >
+          Switch to {this.state.login ? 'Signup' : 'Login' }
+        </p>
       </form>
     );
   }

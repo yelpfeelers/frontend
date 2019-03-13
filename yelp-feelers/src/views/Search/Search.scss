@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+main {
+    background-color: red;
+
+@media (max-width: $tablet) {
+    background-color: blue;
+}
+}
+    

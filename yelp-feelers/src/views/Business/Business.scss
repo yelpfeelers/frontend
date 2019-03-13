@@ -1,0 +1,26 @@
+.ratings {
+    height: 100px;
+    margin: auto;
+    width: 200px;
+
+    .star-light,
+    .star-solid {
+        background-size: 40px 40px;
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+    }
+        
+
+    .star-light {
+        background: url(../../assets/star-light.svg) center center no-repeat;
+    }
+
+    .star-solid {
+        background: url(../../assets/star-solid.svg) center center no-repeat;
+    }
+        
+}
+    
+    
+    

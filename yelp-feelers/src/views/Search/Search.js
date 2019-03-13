@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { locationSearch } from '../../actions';
-import './Search.sass';
+import './Search.scss';
 
 class Search extends Component {
   constructor() {
@@ -26,17 +26,25 @@ class Search extends Component {
 
   render() {
     return (
-      <form
-        onSubmit={this.submit}
-      >
-        <input
-          name="location"
-          onChange={this.handleChange}
-          placeholder="Enter location..."
-          type="text"
-        />
-        <button>></button>
-      </form>
+      <main>
+        <section>
+
+        </section>
+        <section>
+          <form
+            onSubmit={this.submit}
+          >
+            <input
+              name="location"
+              onChange={this.handleChange}
+              placeholder="Enter location..."
+              type="text"
+            />
+            <button>></button>
+          </form>
+        </section>
+      </main>
+      
     );
   }
 }
