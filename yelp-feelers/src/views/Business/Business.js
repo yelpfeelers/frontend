@@ -28,7 +28,6 @@ class Business extends Component {
     enableRating = rating => this.setState({ rating })
 
     bookmarkBusiness = () => {
-        console.log('worked');
         this.props.bookmarkBusiness(this.props.business, this.state.rating);
     }
 

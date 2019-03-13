@@ -19,38 +19,63 @@ export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
 // export const SEND_LOGOUT_REQUEST = 'SEND_LOGOUT_REQUEST';
 
 export const bookmarkBusiness = (business, rating) => dispatch => {
-    let payload = {
+    // let payload = {
+    //     business_id: business.id,
+    //     alias: business.alias,
+    //     image_url: business.image_url,
+    //     is_closed: business.is_closed,
+    //     categories: 'tacos',
+    //     rating: business.rating,
+    //     latitude: business.coordinates.latitude,
+    //     longitude: business.coordinates.longitude,
+    //     transactions: 'n/a',
+    //     price: '$',
+    //     display_phone: business.display_phone,
+    //     location: Object.values(business.location).filter(x => x.length > 0).join(', '),
+    //     my_rating: rating
+    // }
+    // dispatch({ type: POST_BOOKMARK_REQUEST })
+    
+
+    // axiosWithAuth()
+    //     .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload)
+    //     .then(res => {
+    //         console.log(res);
+    //         // dispatch({ type: POST_BOOKMARK_SUCCESS })
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         // dispatch({ type: POST_BOOKMARK_FAILURE })
+    //     })
+
+    // console.log(business)
+
+    axios.post(
+      "https://yelpfeelers.herokuapp.com/api/bookmarks",
+      {
         business_id: business.id,
         alias: business.alias,
         image_url: business.image_url,
         is_closed: business.is_closed,
-        categories: business.categories,
+        categories: 'tacos',
         rating: business.rating,
         latitude: business.coordinates.latitude,
         longitude: business.coordinates.longitude,
-        transactions: business.transactions,
-        price: business.price,
+        transactions: 'n/a',
+        price: '$',
+        display_phone: business.display_phone,
         location: Object.values(business.location).filter(x => x.length > 0).join(', '),
-        display_phone: business.phone,
         my_rating: rating
-    }
-    dispatch({ type: POST_BOOKMARK_REQUEST })
-    // axiosWithAuth()
-
-    axios
-        .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload, {
+      },
+      {
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': window.localStorage.token,
-        }})
-        .then(res => {
-            console.log(res);
-            // dispatch({ type: POST_BOOKMARK_SUCCESS })
-        })
-        .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_BOOKMARK_FAILURE })
-        })
+          "Content-Type": "application/json",
+          Authorization:
+            window.localStorage.token
+        }
+      }
+    )
+    .then(res => console.log(res));
 
 }
 
