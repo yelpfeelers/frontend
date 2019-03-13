@@ -16,7 +16,6 @@ export const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
 export const POST_SIGNUP_FAILURE = 'POST_SIGNUP_FAILURE';
 export const POST_SIGNUP_REQUEST = 'POST_SIGNUP_REQUEST';
 export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
-// export const SEND_LOGOUT_REQUEST = 'SEND_LOGOUT_REQUEST';
 
 export const bookmarkBusiness = (business, rating) => dispatch => {
     // let payload = {
@@ -76,7 +75,48 @@ export const bookmarkBusiness = (business, rating) => dispatch => {
       }
     )
     .then(res => console.log(res));
+}
 
+export const removeBookmark = id => dispatch => {
+    axiosWithAuth()
+        .delete(`https://yelpfeelers.herokuapp.com/api/bookmarks/${id}`)
+        .then(res => {
+            console.log(res);
+            // dispatch({ type: POST_BOOKMARK_SUCCESS })
+        })
+        .catch(err => {
+            console.log(err);
+            // dispatch({ type: POST_BOOKMARK_FAILURE })
+        })
+}
+
+export const updateReview = (business, rating) => dispatch => {
+    axios.update(
+      `https://yelpfeelers.herokuapp.com/api/bookmarks/${business.id}`,
+      {
+        business_id: business.id,
+        alias: business.alias,
+        image_url: business.image_url,
+        is_closed: business.is_closed,
+        categories: 'tacos',
+        rating: business.rating,
+        latitude: business.coordinates.latitude,
+        longitude: business.coordinates.longitude,
+        transactions: 'n/a',
+        price: '$',
+        display_phone: business.display_phone,
+        location: Object.values(business.location).filter(x => x.length > 0).join(', '),
+        my_rating: rating
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            window.localStorage.token
+        }
+      }
+    )
+    .then(res => console.log(res));
 }
 
 export const fetchBookmarks = () => dispatch => {
@@ -152,8 +192,3 @@ export const signupUser = creds => dispatch => {
             // dispatch({ type: POST_SIGNUP_FAILURE });
         })
 }
-
-// export const logoutUser = () => dispatch => {
-//     dispatch({ type: SEND_LOGOUT_REQUEST });
-//     localStorage.removeItem('token');
-// }
