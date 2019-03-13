@@ -18,46 +18,13 @@ export const POST_SIGNUP_REQUEST = 'POST_SIGNUP_REQUEST';
 export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
 
 export const bookmarkBusiness = (business, rating) => dispatch => {
-    // let payload = {
-    //     business_id: business.id,
-    //     alias: business.alias,
-    //     image_url: business.image_url,
-    //     is_closed: business.is_closed,
-    //     categories: 'tacos',
-    //     rating: business.rating,
-    //     latitude: business.coordinates.latitude,
-    //     longitude: business.coordinates.longitude,
-    //     transactions: 'n/a',
-    //     price: '$',
-    //     display_phone: business.display_phone,
-    //     location: Object.values(business.location).filter(x => x.length > 0).join(', '),
-    //     my_rating: rating
-    // }
-    // dispatch({ type: POST_BOOKMARK_REQUEST })
-    
-
-    // axiosWithAuth()
-    //     .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload)
-    //     .then(res => {
-    //         console.log(res);
-    //         // dispatch({ type: POST_BOOKMARK_SUCCESS })
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         // dispatch({ type: POST_BOOKMARK_FAILURE })
-    //     })
-
-    // console.log(business)
-
-    axios.post(
-      "https://yelpfeelers.herokuapp.com/api/bookmarks",
-      {
+    let payload = {
         business_id: business.id,
         alias: business.alias,
         image_url: business.image_url,
         is_closed: business.is_closed,
         categories: 'tacos',
-        rating: business.rating,
+        rating: Math.floor(business.rating),
         latitude: business.coordinates.latitude,
         longitude: business.coordinates.longitude,
         transactions: 'n/a',
@@ -65,16 +32,20 @@ export const bookmarkBusiness = (business, rating) => dispatch => {
         display_phone: business.display_phone,
         location: Object.values(business.location).filter(x => x.length > 0).join(', '),
         my_rating: rating
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            window.localStorage.token
-        }
-      }
-    )
-    .then(res => console.log(res));
+    }
+    dispatch({ type: POST_BOOKMARK_REQUEST })
+    
+
+    axiosWithAuth()
+        .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload)
+        .then(res => {
+            console.log(res);
+            // dispatch({ type: POST_BOOKMARK_SUCCESS })
+        })
+        .catch(err => {
+            console.log(err);
+            // dispatch({ type: POST_BOOKMARK_FAILURE })
+        })
 }
 
 export const removeBookmark = id => dispatch => {
