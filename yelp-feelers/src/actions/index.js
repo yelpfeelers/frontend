@@ -107,17 +107,40 @@ export const fetchBookmarks = () => dispatch => {
 
 export const fetchReviews = id => dispatch => {
     dispatch({ type: GET_REVIEWS_REQUEST });
+ 
+    // 1. Make dynamic call to DS endpoint.
     return axios
-        .get(`https://yelpfeelers.herokuapp.com/api/yelp/reviews/${id}`)
-        .then(res => {
+        .get(`http://api.mota-analytica.io/business/${id}`)
+        .then(res =>  {
+            if (res.data.result) {
+                return res.data.result
+            } else {
+                return [];
+            }
             // console.log(res);
             dispatch({ type: GET_REVIEWS_SUCCESS });
-            return res
+            // return res.data.result.length > 0 ? data === res.data.result : [];
         })
         .catch(err => {
-            // console.log(err);
             dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
-        })
+        });
+
+    // 2. If response contain data return
+    // if (data.length !== 0) return data;
+
+    // // 3. If response didn't contain data use hardcoded id
+    // return axios
+    //     .get('http://api.mota-analytica.io/business/NyLYY8q1-H3hfsTwuwLPCg')
+    //     .then(res => {
+    //         dispatch({ type: GET_REVIEWS_SUCCESS });
+    //         console.log(res)
+    //         // 4. return results array
+    //         // return res.data.result
+            
+    //     })
+    //     .catch(err => {
+    //         dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
+    //     })
 }
 
 export const locationSearch = location => dispatch => {
@@ -140,7 +163,7 @@ export const loginUser = creds => dispatch => {
         .then(res => {
             console.log(res);
             localStorage.setItem('token', res.data.token)
-            // dispatch({ type: POST_LOGIN_SUCCESS });
+            dispatch({ type: POST_LOGIN_SUCCESS });
         })
         .catch(err => {
             console.log(err);

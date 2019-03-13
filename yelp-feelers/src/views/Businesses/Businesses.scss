@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.businesses-main {
+    background-color: #f5f5f5;
+    display: block;
+    min-height: 100vh;
+    margin: auto;
+    max-width: $max;
+
+    @media (min-width: $desktop) {
+        display: flex;
+    }
+
+    .businesses-results {
+
+        @media (min-width: $desktop) {
+            width: 60%;
+        }
+    }
+
+    .businesses-map {
+        display: none;
+
+        @media (min-width: $desktop) {
+            display: block;
+            width: 40%;
+        }
+    }
+}

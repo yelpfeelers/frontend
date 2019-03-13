@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainHeader = styled.header`
-    background-color: blue;
-    height: 100px;
+    background-color: #d32323;
+    height: 50px;
     width: 100%;
 `;
 

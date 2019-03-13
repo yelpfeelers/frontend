@@ -20,7 +20,11 @@ const initialState = {
             id: "JARsJVKLPgs_yC3cwDnp7g",
             image_url: "https://s3-media2.fl.yelpcdn.com/bphoto/quJVkgOw_pf70_enWelldw/o.jpg",
             is_closed: false,
-            location: {address1: "2889 Mission St", address2: "", address3: "", city: "San Francisco", zip_code: "94110" },
+            location: {
+                display_address: {
+                    address1: "2889 Mission St", address2: "", address3: "", city: "San Francisco", zip_code: "94110",
+                }
+            }, 
             name: "La Taqueria",
             phone: "+14152857117",
             price: "$",
@@ -55,7 +59,9 @@ export default (state = initialState, action) => {
         case POST_LOGIN_REQUEST:
             return state;
         case POST_LOGIN_SUCCESS:
-            return state;
+            return {
+                ...state, isAuth: true
+            }
         case POST_SIGNUP_FAILURE:
             return state;
         case POST_SIGNUP_REQUEST:

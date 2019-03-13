@@ -12,17 +12,14 @@ class Business extends Component {
         super();
         this.state = {
             rating: 0,
-            reviews: []
+            reviews: [],
+            truthy: false,
         }
     }
 
     componentDidMount() {
         this.props.fetchReviews(this.props.match.params.businessId)
-            .then(res => {
-                this.setState({
-                    reviews: res.data
-                })
-            });
+            .then(res => this.setState({ reviews: res }));
     }
 
     enableRating = rating => this.setState({ rating })
@@ -34,29 +31,53 @@ class Business extends Component {
     render() {
         return (
             <>
-                <Header />
-                <main>
-                    <BusinessComponent business={this.props.business} />
-                    <section className="ratings">
-                        <div>
-                            <Star rating={this.state.rating} enableRating={this.enableRating} star={1} />
-                            <Star rating={this.state.rating} enableRating={this.enableRating} star={2} />
-                            <Star rating={this.state.rating} enableRating={this.enableRating} star={3} />
-                            <Star rating={this.state.rating} enableRating={this.enableRating} star={4} />
-                            <Star rating={this.state.rating} enableRating={this.enableRating} star={5} />
-                        </div>
-                        <button
-                            onClick={this.bookmarkBusiness}
-                        >
-                            Add Rating
-                        </button>
-                    </section>
-                    <section>
-                        {
-                            this.state.reviews.map(review => <Review review={review} key={review.id} />)
-                        }
-                    </section>
-                </main>
+                 <Header />
+                 <main className="business-main">
+                     <section className="business-analysis"></section>
+                     <section className="business-data">
+                            <BusinessComponent business={this.props.business} />
+                            <div className="bookmark">
+                                <button
+                                    onClick={this.bookmarkBusiness}
+                                >
+                                    Bookmark Business
+                                </button>
+                            </div>
+                            
+                            {/* <section className="ratings">
+                                <div>
+                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={1} />
+                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={2} />
+                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={3} />
+                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={4} />
+                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={5} />
+                                </div>
+                                <button
+                                    onClick={this.bookmarkBusiness}
+                                >
+                                    Bookmark Business
+                                </button>
+                            </section> */}
+                        
+                        <section className="business-reviews">
+                            {
+                                this.state.reviews.map((review, i) => (
+                                    <Review
+                                    key={i}
+                                    adjusted={review.adjusted_score}
+                                    review={review.review}
+                                    score={review.score}
+                                    truthy={this.state.truthy} 
+                                    />)
+                                )
+                            }
+                        </section>
+                     </section>
+
+                 </main>
+                 <main>
+
+                 </main>
             </>
         )
     }

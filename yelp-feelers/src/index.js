@@ -12,7 +12,6 @@ import App from './App';
 
 import './index.scss';
 
-
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
