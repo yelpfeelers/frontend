@@ -6,7 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {... rest}
         render={props => (
-            props.isAuth ?
+            localStorage.getItem('token') ?
             <Component {...props} /> :
             <Redirect push to="/account" />
         )}
