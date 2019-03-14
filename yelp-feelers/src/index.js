@@ -5,8 +5,6 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-
 import rootReducer from './reducers';
 import App from './App';
 
@@ -15,9 +13,9 @@ import './index.scss';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router>
-            <App />
-        </Router>
-    </Provider>, 
-document.getElementById('root'));
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('root'));
