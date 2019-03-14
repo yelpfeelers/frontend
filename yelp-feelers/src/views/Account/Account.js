@@ -7,19 +7,19 @@ import './Account.scss';
 
 const Account = props => (
     <main className="account-main">
-        {
-            // props.isAuth === false ?
-            // <Form /> :
-            // <Bookmarks />
-        }   
-        <section className="account-form">
-            <div className="account-container">
-                <div className="logo"></div>
-                <Form />
-            </div>
-            
-        </section>
-        <section className="account-aside"></section>
+        <div className="split-adjust">
+            <section className="account-form">
+                <div className="account-container">
+                    <div className="logo"></div>
+                    <Form />
+                </div>
+                
+            </section>
+        </div>
+        <div className="split">
+            <section className="account-aside"></section>
+        </div>
+        
     </main>
 )
 
