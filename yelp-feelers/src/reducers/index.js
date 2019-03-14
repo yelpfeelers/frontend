@@ -51,7 +51,7 @@ const initialState = {
     error: null,
     fetchingBookmarks: false,
     fetchingReviews: false,
-    isAuth: false,
+    isAuth: true,
     loggingIn: false,
     searchingLocation: false,
     signingUp: false,
