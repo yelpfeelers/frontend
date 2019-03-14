@@ -18,9 +18,6 @@
 
         .bookmark {
             background-color: #ffffff;
-            border-bottom: 1px solid #cddae2;
-            border-left: 1px solid #cddae2;
-            border-right: 1px solid #cddae2;
             margin: auto;
             max-width: 500px;
             width: 90%;
@@ -64,6 +61,7 @@
 
     .business-analysis {
         display: none;
+        position: relative;
 
         @media (min-width: $desktop) {
             display: block;
