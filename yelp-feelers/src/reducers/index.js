@@ -27,25 +27,25 @@ import {
 
 const initialState = {
     businesses: [
-        {
-            alias: "bomb-tacos-las-vegas-12",
-            categories: Array[1],
-            display_phone: "",
-            distance: 13102.951448503378,
-            id: "82g1PwX5FvclqqdjJHcVNA",
-            image_url: "https://s3-media3.fl.yelpcdn.com/bphoto/PJ0X0DDhpOeeiE4UPLRpdQ/o.jpg",
-            is_closed: false,
-            location: {
-                display_address:[ "3655 South Durango Dr", "Ste 27", "Las Vegas, NV 89147"]
-            },
-            name: "Bomb Tacos",
-            phone: "",
-            price: "$$",
-            rating: 4.5,
-            review_count: 434,
-            transactions: Array[0],
-            url: "https://www.yelp.com/biz/bomb-tacos-las-vegas-12?adjust_creative=K_LEoK1MMSLkCWW3JVcg8w&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=K_LEoK1MMSLkCWW3JVcg8w"
-        }
+        // {
+        //     alias: "bomb-tacos-las-vegas-12",
+        //     categories: Array[1],
+        //     display_phone: "",
+        //     distance: 13102.951448503378,
+        //     id: "82g1PwX5FvclqqdjJHcVNA",
+        //     image_url: "https://s3-media3.fl.yelpcdn.com/bphoto/PJ0X0DDhpOeeiE4UPLRpdQ/o.jpg",
+        //     is_closed: false,
+        //     location: {
+        //         display_address:[ "3655 South Durango Dr", "Ste 27", "Las Vegas, NV 89147"]
+        //     },
+        //     name: "Bomb Tacos",
+        //     phone: "",
+        //     price: "$$",
+        //     rating: 4.5,
+        //     review_count: 434,
+        //     transactions: Array[0],
+        //     url: "https://www.yelp.com/biz/bomb-tacos-las-vegas-12?adjust_creative=K_LEoK1MMSLkCWW3JVcg8w&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=K_LEoK1MMSLkCWW3JVcg8w"
+        // }
     ],
     bookmarks: [],
     error: null,
@@ -56,7 +56,7 @@ const initialState = {
     searchingLocation: false,
     signingUp: false,
     updatingBookmarks: false,
-    username: "taco",
+    username: null,
 }
 
 export default (state = initialState, action) => {

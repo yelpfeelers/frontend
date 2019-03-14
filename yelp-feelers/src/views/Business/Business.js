@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
@@ -45,11 +46,23 @@ class Business extends Component {
                      <section className="business-data">
                             <BusinessComponent business={this.props.business} />
                             <div className="bookmark">
-                                <button
-                                    onClick={this.bookmarkBusiness}
-                                >
-                                    Bookmark Business
-                                </button>
+                            {
+                                this.props.isAuth ?
+                                (
+                                    <button
+                                        onClick={this.bookmarkBusiness}
+                                    >
+                                        Bookmark Business
+                                    </button>
+                                ):
+                                (
+                                    <Link to="/account">
+                                        <button>Login to add Bookmark</button>
+                                    </Link>
+                                    
+                                )
+                            }
+                                
                             </div>
                         <section className="business-reviews">
                             <button
@@ -81,7 +94,8 @@ class Business extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    business: state.businesses.filter(b => b.id === props.match.params.businessId)[0]
+    business: state.businesses.filter(b => b.id === props.match.params.businessId)[0],
+    isAuth: state.isAuth
 })
 
 export default connect(mapStateToProps, { bookmarkBusiness, fetchReviews })(Business);
