@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {... rest}
-        render={
-            props => props.isAuth === false ?
-            <Redirect to="/account" /> :
-            <Component {...props} />
-            
-        }
+        render={props => (
+            props.isAuth ?
+            <Component {...props} /> :
+            <Redirect push to="/account" />
+        )}
     />
 );
 
