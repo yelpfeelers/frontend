@@ -67,6 +67,7 @@ class Search extends Component {
   render() {
     return (
       <main className="search-main">
+        <div className="split-adjust">
           <section className="search-form">
               <div className="search-container">
                   <div className="logo"></div>
@@ -84,7 +85,10 @@ class Search extends Component {
               </div>
 
           </section>
+        </div>
+        <div className="split">
           <section className="search-aside"></section>
+        </div>
       </main>
     );
   }

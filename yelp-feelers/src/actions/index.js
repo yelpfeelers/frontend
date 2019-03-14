@@ -1,6 +1,12 @@
 import axios from 'axios';
 import axiosWithAuth from '../auth';
 
+export const DELETE_BOOKMARK_FAILURE = 'DELETE_BOOKMARK_FAILURE';
+export const DELETE_BOOKMARK_REQUEST = 'DELETE_BOOKMARK_REQUEST';
+export const DELETE_BOOKMARK_SUCCESS = 'DELETE_BOOKMARK_SUCCESS';
+export const GET_BOOKMARK_FAILURE = 'GET_BOOKMARK_FAILURE';
+export const GET_BOOKMARK_REQUEST = 'GET_BOOKMARK_REQUEST';
+export const GET_BOOKMARK_SUCCESS = 'GET_BOOKMARK_SUCCESS';
 export const GET_LOCATION_FAILURE = 'GET_LOCATION_FAILURE';
 export const GET_LOCATION_REQUEST = 'GET_LOCATION_REQUEST';
 export const GET_LOCATION_SUCCESS = 'GET_LOCATION_SUCCESS';
@@ -16,131 +22,83 @@ export const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
 export const POST_SIGNUP_FAILURE = 'POST_SIGNUP_FAILURE';
 export const POST_SIGNUP_REQUEST = 'POST_SIGNUP_REQUEST';
 export const POST_SIGNUP_SUCCESS = 'POST_SIGNUP_SUCCESS';
+export const UPDATE_BOOKMARKS_FAILURE = 'UPDATE_REVIEWS_FAILURE';
+export const UPDATE_BOOKMARKS_REQUEST = 'UPDATE_REVIEWS_REQUEST';
+export const UPDATE_BOOKMARKS_SUCCESS = 'UPDATE_REVIEWS_SUCCESS';
 
 export const bookmarkBusiness = (business, rating) => dispatch => {
     let payload = {
         business_id: business.id,
-        alias: business.alias,
         image_url: business.image_url,
-        is_closed: business.is_closed,
-        categories: 'tacos',
-        rating: Math.floor(business.rating),
-        latitude: business.coordinates.latitude,
-        longitude: business.coordinates.longitude,
-        transactions: 'n/a',
-        price: '$',
-        display_phone: business.display_phone,
-        location: Object.values(business.location).filter(x => x.length > 0).join(', '),
-        my_rating: rating
+        name: business.name,
+        rating: rating,
     }
+
     dispatch({ type: POST_BOOKMARK_REQUEST })
     
-
     axiosWithAuth()
         .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload)
         .then(res => {
-            console.log(res);
-            // dispatch({ type: POST_BOOKMARK_SUCCESS })
+            dispatch({ type: POST_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
         })
         .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_BOOKMARK_FAILURE })
+            dispatch({ type: POST_BOOKMARK_FAILURE, payload: err.message });
         })
 }
 
-export const removeBookmark = id => dispatch => {
+export const deleteBookmark = id => dispatch => {
+    dispatch({ type: DELETE_BOOKMARK_REQUEST });
     axiosWithAuth()
         .delete(`https://yelpfeelers.herokuapp.com/api/bookmarks/${id}`)
         .then(res => {
-            console.log(res);
-            // dispatch({ type: POST_BOOKMARK_SUCCESS })
+            dispatch({ type: DELETE_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
         })
         .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_BOOKMARK_FAILURE })
+            dispatch({ type: DELETE_BOOKMARK_FAILURE, payload: err.message });
         })
 }
 
-export const updateReview = (business, rating) => dispatch => {
-    axios.update(
-      `https://yelpfeelers.herokuapp.com/api/bookmarks/${business.id}`,
-      {
-        business_id: business.id,
-        alias: business.alias,
-        image_url: business.image_url,
-        is_closed: business.is_closed,
-        categories: 'tacos',
-        rating: business.rating,
-        latitude: business.coordinates.latitude,
-        longitude: business.coordinates.longitude,
-        transactions: 'n/a',
-        price: '$',
-        display_phone: business.display_phone,
-        location: Object.values(business.location).filter(x => x.length > 0).join(', '),
-        my_rating: rating
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            window.localStorage.token
-        }
-      }
-    )
-    .then(res => console.log(res));
+export const updateBookmark = bm => dispatch => {
+    console.log(bm, 'here')
+    dispatch({ type: UPDATE_BOOKMARKS_REQUEST })
+    axiosWithAuth()
+        .put(`https://yelpfeelers.herokuapp.com/api/bookmarks/${bm.id}`, bm)
+        .then(res => {
+            dispatch({ type: UPDATE_BOOKMARKS_SUCCESS, payload: res.data.data[0].bookmark })
+        })
+        .catch(err => {
+            dispatch({ type: UPDATE_BOOKMARKS_FAILURE})
+        });
 }
 
 export const fetchBookmarks = () => dispatch => {
-    console.log('fetch action')
-    // dispatch({ type: GET_BOOKMARK_REQUEST })
+    dispatch({ type: GET_BOOKMARK_REQUEST })
     axiosWithAuth()
         .get('https://yelpfeelers.herokuapp.com/api/bookmarks')
         .then(res => {
             console.log(res);
-            // dispatch({ type: POST_BOOKMARK_SUCCESS })
+            dispatch({ type: GET_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
         })
         .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_BOOKMARK_FAILURE })
+            dispatch({ type: GET_BOOKMARK_FAILURE, payload: err.message });
         })
 }
 
 export const fetchReviews = id => dispatch => {
     dispatch({ type: GET_REVIEWS_REQUEST });
- 
-    // 1. Make dynamic call to DS endpoint.
     return axios
         .get(`http://api.mota-analytica.io/business/${id}`)
         .then(res =>  {
+            dispatch({ type: GET_REVIEWS_SUCCESS });
             if (res.data.result) {
                 return res.data.result
             } else {
                 return [];
             }
-            // console.log(res);
-            dispatch({ type: GET_REVIEWS_SUCCESS });
-            // return res.data.result.length > 0 ? data === res.data.result : [];
         })
         .catch(err => {
             dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
         });
-
-    // 2. If response contain data return
-    // if (data.length !== 0) return data;
-
-    // // 3. If response didn't contain data use hardcoded id
-    // return axios
-    //     .get('http://api.mota-analytica.io/business/NyLYY8q1-H3hfsTwuwLPCg')
-    //     .then(res => {
-    //         dispatch({ type: GET_REVIEWS_SUCCESS });
-    //         console.log(res)
-    //         // 4. return results array
-    //         // return res.data.result
-            
-    //     })
-    //     .catch(err => {
-    //         dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
-    //     })
 }
 
 export const locationSearch = location => dispatch => {
@@ -156,33 +114,27 @@ export const locationSearch = location => dispatch => {
 }
 
 export const loginUser = creds => dispatch => {
-    console.log('login', creds)
     dispatch({ type: POST_LOGIN_REQUEST });
     axios
         .post('https://yelpfeelers.herokuapp.com/api/users/login', creds)
         .then(res => {
-            console.log(res);
             localStorage.setItem('token', res.data.token)
-            dispatch({ type: POST_LOGIN_SUCCESS });
+            dispatch({ type: POST_LOGIN_SUCCESS, payload: res.data.user.username });
         })
         .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_LOGIN_FAILURE });
+            dispatch({ type: POST_LOGIN_FAILURE, payload: err.message });
         })
 }
 
 export const signupUser = creds => dispatch => {
-    console.log('signup', creds);
     dispatch({ type: POST_SIGNUP_REQUEST });
     axios
         .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
         .then(res => {
-            console.log(res);
-            localStorage.setItem('token', res.data.token) // <------- !!!! Get 
-            // dispatch({ type: POST_SIGNUP_SUCCESS });
+            localStorage.setItem('token', res.data.token)
+            dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data.username });
         })
         .catch(err => {
-            console.log(err);
-            // dispatch({ type: POST_SIGNUP_FAILURE });
+            dispatch({ type: POST_SIGNUP_FAILURE, payload: err.message });
         })
 }

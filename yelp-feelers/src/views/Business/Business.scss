@@ -18,6 +18,9 @@
 
         .bookmark {
             background-color: #ffffff;
+            border-bottom: 1px solid #cddae2;
+            border-left: 1px solid #cddae2;
+            border-right: 1px solid #cddae2;
             margin: auto;
             max-width: 500px;
             width: 90%;
@@ -38,12 +41,24 @@
         }
 
         .business-reviews {
-            background-color: #ffffff;
             margin: auto;
             margin-top: 30px;
             max-width: 500px;
             width: 90%;
             padding: 10px 10px 10px 10px;
+
+            button {
+                background-color: #578843;
+                border-radius: 8px;
+                color: white;
+                cursor: pointer;
+                display: block;
+                font-size: 1.4rem;
+                font-weight: 500;
+                margin: auto;
+                padding: 5px 20px;
+                letter-spacing: 0.05rem;
+            }
         }
     }
 
@@ -55,30 +70,6 @@
             width: 40%;
         }
     }
-}
-
-.ratings {
-    height: 100px;
-    margin: auto;
-    width: 200px;
-
-    .star-light,
-    .star-solid {
-        background-size: 40px 40px;
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-    }
-        
-
-    .star-light {
-        background: url(../../assets/star-light.svg) center center no-repeat;
-    }
-
-    .star-solid {
-        background: url(../../assets/star-solid.svg) center center no-repeat;
-    }
-        
 }
     
     

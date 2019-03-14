@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
+import WordCloud from '../../components/WordCloud/WordCloud';
 import { bookmarkBusiness, fetchReviews } from '../../actions';
-import Star from '../../components/Star/Star';
 import './Business.scss';
 
 class Business extends Component {
@@ -22,10 +22,16 @@ class Business extends Component {
             .then(res => this.setState({ reviews: res }));
     }
 
-    enableRating = rating => this.setState({ rating })
-
     bookmarkBusiness = () => {
         this.props.bookmarkBusiness(this.props.business, this.state.rating);
+    }
+
+    toggleReviews = () => {
+        this.setState(state => {
+            return ({
+                truthy: !state.truthy
+            });
+        });
     }
 
     render() {
@@ -33,7 +39,9 @@ class Business extends Component {
             <>
                  <Header />
                  <main className="business-main">
-                     <section className="business-analysis"></section>
+                     <section className="business-analysis">
+                        <WordCloud id={this.props.match.params.businessId} />
+                     </section>
                      <section className="business-data">
                             <BusinessComponent business={this.props.business} />
                             <div className="bookmark">
@@ -43,28 +51,17 @@ class Business extends Component {
                                     Bookmark Business
                                 </button>
                             </div>
-                            
-                            {/* <section className="ratings">
-                                <div>
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={1} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={2} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={3} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={4} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={5} />
-                                </div>
-                                <button
-                                    onClick={this.bookmarkBusiness}
-                                >
-                                    Bookmark Business
-                                </button>
-                            </section> */}
-                        
                         <section className="business-reviews">
+                            <button
+                                onClick={this.toggleReviews}
+                            >
+                               Display {this.state.truthy ? 'original' :  'adjusted'} reviews
+                            </button>
                             {
                                 this.state.reviews.map((review, i) => (
                                     <Review
                                     key={i}
-                                    adjusted={review.adjusted_score}
+                                    adjusted={review['adjusted score']}
                                     review={review.review}
                                     score={review.score}
                                     truthy={this.state.truthy} 
