@@ -74,8 +74,14 @@ class Form extends Component {
       username: this.state.username,
       password: this.state.password
     }
-    this.state.login ? this.props.loginUser(user) : this.props.signupUser(user)
     this.setState({ login: false, username: '', password: '' });
+    if (this.state.login) {
+      this.props.loginUser(user)
+        .then(res => this.props.history.push('/bookmarks'));
+    } else {
+      this.props.signupUser(user)
+        .then(res =>  this.props.history.push('/bookmarks'))
+    }
   }
 
   toggleLogin = () => {

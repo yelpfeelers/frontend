@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Bookmarks from '../Bookmarks/Bookmarks';
 import Form from '../../components/Form/Form';
 import './Account.scss';
 
@@ -11,7 +10,7 @@ const Account = props => (
             <section className="account-form">
                 <div className="account-container">
                     <div className="logo"></div>
-                    <Form />
+                    <Form history={props.history} />
                 </div>
                 
             </section>

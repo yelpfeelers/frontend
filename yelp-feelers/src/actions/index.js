@@ -115,11 +115,12 @@ export const locationSearch = location => dispatch => {
 
 export const loginUser = creds => dispatch => {
     dispatch({ type: POST_LOGIN_REQUEST });
-    axios
+    return axios
         .post('https://yelpfeelers.herokuapp.com/api/users/login', creds)
         .then(res => {
             localStorage.setItem('token', res.data.token)
             dispatch({ type: POST_LOGIN_SUCCESS, payload: res.data.user.username });
+            return;
         })
         .catch(err => {
             dispatch({ type: POST_LOGIN_FAILURE, payload: err.message });
@@ -128,11 +129,12 @@ export const loginUser = creds => dispatch => {
 
 export const signupUser = creds => dispatch => {
     dispatch({ type: POST_SIGNUP_REQUEST });
-    axios
+    return axios
         .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
         .then(res => {
             localStorage.setItem('token', res.data.token)
-            dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data.username });
+            dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data.user.username });
+            return;
         })
         .catch(err => {
             dispatch({ type: POST_SIGNUP_FAILURE, payload: err.message });

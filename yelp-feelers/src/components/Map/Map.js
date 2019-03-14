@@ -1,7 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import styled from 'styled-components';
-import star from '../../assets/star-solid.svg'
 
 const Div = styled.div`
     height: 100%;
@@ -10,7 +9,6 @@ const Div = styled.div`
 
 const Section = styled.section`
     background-color: white;
-    // border-bottom: 1px solid #cddae2;
     display: block;
     height: 300px;
     margin-top: 30px;
