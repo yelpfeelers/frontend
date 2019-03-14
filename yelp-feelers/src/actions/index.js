@@ -131,6 +131,7 @@ export const signupUser = creds => dispatch => {
     axios
         .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
         .then(res => {
+            console.log(res);
             localStorage.setItem('token', res.data.token)
             dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data.username });
         })
