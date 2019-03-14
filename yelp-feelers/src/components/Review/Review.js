@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import star from '../../assets/star-light.svg';
+import star from '../../assets/star-light-original.svg';
 
 const Article = styled.article`
     background-color: #ffffff;

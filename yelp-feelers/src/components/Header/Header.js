@@ -59,8 +59,12 @@ const Header = props => (
                 />
             </Div>
             <Div>
-                <Logo icon={yelp}/>
-                <Title>Tacopedia</Title>
+                <Link to="/">
+                    <Div>
+                        <Logo icon={yelp}/>
+                        <Title>Tacopedia</Title>
+                    </Div>
+                </Link>
             </Div>
             <Div>
                 <Link to="/bookmarks">
