@@ -75,7 +75,7 @@ const Business = props => (
                 <Link to={`/businesses/${props.business.id}`}>
                     <Title>{props.business.name}</Title>
                 </Link>
-                <SubTitle>{Object.values(props.business.location.display_address).filter(x => x.length > 0).join(', ')}</SubTitle>
+                <SubTitle>{props.business.location.display_address.filter(x => x.length > 0).join(', ')}</SubTitle>
                 <SubTitle>{props.business.display_phone}</SubTitle>
             </Section>
         </Flex>

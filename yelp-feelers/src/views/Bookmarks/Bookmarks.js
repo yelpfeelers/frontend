@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBookmarks } from '../../actions';
+import { fetchBookmarks, updateBookmarks } from '../../actions';
+import Bookmark from '../../components/Bookmark/Bookmark';
 import Header from '../../components/Header/Header';
 
 class Bookmarks extends Component {
@@ -8,10 +9,28 @@ class Bookmarks extends Component {
         this.props.fetchBookmarks()
     }
 
+    updateBookmarks = bm => {
+        this.props.updateBookmarks(bm);
+    }
+
     render() {
         return (
             <>
                 <Header />
+                <main className="bookmarks-main">
+                    <section className="bookmarks-map"></section>
+                    <section className="bookmarks-results">
+                        {
+                            this.props.bookmarks.map(bookmark => (
+                                <Bookmark
+                                    key={bookmark.id}
+                                    bookmark={bookmark}
+                                    update={this.updateBookmarks}
+                                />
+                            ))
+                        }
+                    </section>
+                </main>
                 <main>
 
                 </main>
@@ -20,4 +39,8 @@ class Bookmarks extends Component {
     }
 }
 
-export default connect(null, { fetchBookmarks })(Bookmarks);
+const mapStateToProps = state => ({
+    bookmarks: state.bookmarks
+})
+
+export default connect(mapStateToProps, { fetchBookmarks, updateBookmarks })(Bookmarks);

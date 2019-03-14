@@ -14,7 +14,7 @@ class App extends Component {
       <>
         <Route exact path="/" component={Search} />
         {/* <Route exact path="/bookmarks" component={Bookmarks} /> */}
-        <PrivateRoute exact path="/bookmarks" component={Bookmarks} />
+        <PrivateRoute path="/bookmarks" component={Bookmarks} />
         <Route exact path="/businesses" component={Businesses} />
         <Route path="/businesses/:businessId" component={Business} />
         <Route path="/account" component={Account} />

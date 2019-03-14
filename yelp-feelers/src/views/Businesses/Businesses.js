@@ -15,7 +15,6 @@ const Businesses = props => (
                     props.businesses.map(business => <Business key={business.id} business={business} />)
                 }
             </section>
-            
         </main>
         <main>
             

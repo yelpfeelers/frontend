@@ -22,10 +22,16 @@ class Business extends Component {
             .then(res => this.setState({ reviews: res }));
     }
 
-    enableRating = rating => this.setState({ rating })
-
     bookmarkBusiness = () => {
         this.props.bookmarkBusiness(this.props.business, this.state.rating);
+    }
+
+    toggleReviews = () => {
+        this.setState(state => {
+            return ({
+                truthy: !state.truthy
+            });
+        });
     }
 
     render() {
@@ -43,28 +49,17 @@ class Business extends Component {
                                     Bookmark Business
                                 </button>
                             </div>
-                            
-                            {/* <section className="ratings">
-                                <div>
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={1} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={2} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={3} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={4} />
-                                    <Star rating={this.state.rating} enableRating={this.enableRating} star={5} />
-                                </div>
-                                <button
-                                    onClick={this.bookmarkBusiness}
-                                >
-                                    Bookmark Business
-                                </button>
-                            </section> */}
-                        
                         <section className="business-reviews">
+                            <button
+                                onClick={this.toggleReviews}
+                            >
+                               Display {this.state.truthy ? 'original' :  'adjusted'} reviews
+                            </button>
                             {
                                 this.state.reviews.map((review, i) => (
                                     <Review
                                     key={i}
-                                    adjusted={review.adjusted_score}
+                                    adjusted={review['adjusted score']}
                                     review={review.review}
                                     score={review.score}
                                     truthy={this.state.truthy} 
