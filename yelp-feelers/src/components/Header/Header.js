@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from "react-router";
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import bookmark from '../../assets/bookmark.svg';
 import yelp from '../../assets/Yelp_trademark_RGB.png';
@@ -50,14 +52,23 @@ const Title = styled.h1`
 const Header = props => (
     <MainHeader>
         <Nav>
-            <Icon icon={back}/>
+            <Div>
+                <Icon
+                    onClick={props.history.goBack}
+                    icon={back}
+                />
+            </Div>
             <Div>
                 <Logo icon={yelp}/>
                 <Title>Tacopedia</Title>
             </Div>
-            <Icon icon={bookmark} />
+            <Div>
+                <Link to="/bookmarks">
+                    <Icon icon={bookmark} />
+                </Link>
+            </Div>
         </Nav>
     </MainHeader>
 )
 
-export default Header;
+export default withRouter(Header);
