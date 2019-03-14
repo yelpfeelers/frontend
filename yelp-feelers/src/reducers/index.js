@@ -1,4 +1,7 @@
 import {
+    DELETE_BOOKMARK_FAILURE,
+    DELETE_BOOKMARK_REQUEST,
+    DELETE_BOOKMARK_SUCCESS,
     GET_BOOKMARK_FAILURE,
     GET_BOOKMARK_REQUEST,
     GET_BOOKMARK_SUCCESS,
@@ -53,12 +56,24 @@ const initialState = {
     searchingLocation: false,
     signingUp: false,
     updatingBookmarks: false,
-    updatingReviews: false,
     username: "taco",
 }
 
 export default (state = initialState, action) => {
     switch(action.type) {
+        case DELETE_BOOKMARK_FAILURE:
+            return {
+                ...state, error: action.payload, updatingBookmarks: false,
+            }
+        case DELETE_BOOKMARK_REQUEST:
+            return {
+                ...state, error: null, updatingBookmarks: true,
+            }
+        case DELETE_BOOKMARK_SUCCESS: {
+            return {
+                ...state, bookmarks: action.payload, updatingBookmarks: false,
+            }
+        }
         case GET_BOOKMARK_FAILURE:
             return {
                 ...state, error: action.payload, fetchingBookmarks: false,
@@ -69,7 +84,7 @@ export default (state = initialState, action) => {
             }
         case GET_BOOKMARK_SUCCESS:
             return {
-                ...state, fetchingBookmarks: false, bookmarks: action.payload
+                ...state, fetchingBookmarks: false, bookmarks: action.payload,
             }
         case GET_LOCATION_FAILURE:
             return {
@@ -107,7 +122,7 @@ export default (state = initialState, action) => {
             }
         case POST_BOOKMARK_SUCCESS:
             return {
-                ...state, updatingBookmarks: false,
+                ...state, updatingBookmarks: false, bookmarks: action.payload,
             }
         case POST_LOGIN_FAILURE:
             return {
@@ -135,15 +150,15 @@ export default (state = initialState, action) => {
             }
         case UPDATE_BOOKMARKS_FAILURE:
             return {
-                ...state, error: action.payload, updatingReviews: false
+                ...state, error: action.payload, updatingBookmarks: false
             }
         case UPDATE_BOOKMARKS_REQUEST:
             return {
-                ...state, error: null, updatingReviews: true
+                ...state, error: null, updatingBookmarks: true
             }
         case UPDATE_BOOKMARKS_SUCCESS:
             return {
-                ...state, updatingReviews: false
+                ...state, updatingBookmarks: false, bookmarks: action.payload,
             }
         default:
             return state

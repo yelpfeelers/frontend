@@ -1,15 +1,37 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import Star from '../../components/Star/Star';
+import x from '../../assets/times-light.svg';
 
 const Article = styled.article`
     background-color: #ffffff;
     border-bottom: 1px solid #cddae2;
+    display: flex;
+    justify-content: flex-end;
     margin: auto;
     margin-top: 30px;
     max-width: 500px;
     width: 90%;
     padding: 10px 10px 10px 10px;
+`;
+
+const Div = styled.div`
+    flex: 1;
+`;
+
+const IconContainer = styled.div`
+    display: flex;
+    width: 50px;
+`;
+
+const Icon = styled.div`
+    background: url(${x}) center no-repeat;
+    background-size: 40px 40px;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    margin: auto;
+    width: 15px;
 `;
 
 const Header = styled.header`
@@ -47,7 +69,7 @@ class Bookmark extends Component {
     }
 
     submitRating = rating => {
-        this.props.update({
+        this.props.updateBookmark({
             id: this.props.bookmark.id,
             name: this.props.bookmark.name,
             image_url: this.props.bookmark.image_url,
@@ -59,19 +81,25 @@ class Bookmark extends Component {
     render() {
         return (
             <Article>
-                <Header>
-                    <Img src={this.props.bookmark.image_url} alt={this.props.bookmark.name} />
-                    <Title>{this.props.bookmark.name}</Title>
-                </Header>
-                <Section>
-                    <Star rating={this.state.rating} submitRating={this.submitRating} star={1} />
-                    <Star rating={this.state.rating} submitRating={this.submitRating} star={2} />
-                    <Star rating={this.state.rating} submitRating={this.submitRating} star={3} />
-                    <Star rating={this.state.rating} submitRating={this.submitRating} star={4} />
-                    <Star rating={this.state.rating} submitRating={this.submitRating} star={5} />
-                </Section>
+                <Div>
+                    <Header>
+                        <Img src={this.props.bookmark.image_url} alt={this.props.bookmark.name} />
+                        <Title>{this.props.bookmark.name}</Title>
+                    </Header>
+                    <Section>
+                        <Star rating={this.state.rating} submitRating={this.submitRating} star={1} />
+                        <Star rating={this.state.rating} submitRating={this.submitRating} star={2} />
+                        <Star rating={this.state.rating} submitRating={this.submitRating} star={3} />
+                        <Star rating={this.state.rating} submitRating={this.submitRating} star={4} />
+                        <Star rating={this.state.rating} submitRating={this.submitRating} star={5} />
+                    </Section>
+                </Div>
+                <IconContainer>
+                    <Icon
+                        onClick={() => this.props.deleteBookmark(this.props.bookmark.id)}
+                    />
+                </IconContainer>
             </Article>
-            
         )
     }
 }
