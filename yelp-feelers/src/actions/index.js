@@ -86,20 +86,19 @@ export const fetchBookmarks = () => dispatch => {
 
 export const fetchReviews = id => dispatch => {
     dispatch({ type: GET_REVIEWS_REQUEST });
-    return
-    // return axios
-    //     .get(`https://api.mota-analytica.io/business/${id}`)
-    //     .then(res =>  {
-    //         dispatch({ type: GET_REVIEWS_SUCCESS });
-    //         if (res.data.result) {
-    //             return res.data.result
-    //         } else {
-    //             return [];
-    //         }
-    //     })
-    //     .catch(err => {
-    //         dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
-    //     });
+    return axios
+        .get(`https://api.mota-analytica.io/business/${id}`)
+        .then(res =>  {
+            dispatch({ type: GET_REVIEWS_SUCCESS });
+            if (res.data.result) {
+                return res.data.result
+            } else {
+                return [];
+            }
+        })
+        .catch(err => {
+            dispatch({ type: GET_REVIEWS_FAILURE, payload: err.message });
+        });
 }
 
 export const locationSearch = location => dispatch => {

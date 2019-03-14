@@ -69,7 +69,7 @@ const WordCloud = props => (
                 </SubTitle>
             </Article>
             <Container>
-                {/* <Img src={`http://api.mota-analytica.io/wordcloud/${props.id}`} alt={props.id} /> */}
+                <Img src={`https://api.mota-analytica.io/wordcloud/${props.id}`} alt={props.id} />
             </Container>
             
         </Section>
