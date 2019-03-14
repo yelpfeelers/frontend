@@ -20,6 +20,7 @@
 
     .businesses-map {
         display: none;
+        position: relative;
 
         @media (min-width: $desktop) {
             display: block;

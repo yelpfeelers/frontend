@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
+import WordCloud from '../../components/WordCloud/WordCloud';
 import { bookmarkBusiness, fetchReviews } from '../../actions';
-import Star from '../../components/Star/Star';
 import './Business.scss';
 
 class Business extends Component {
@@ -39,7 +39,9 @@ class Business extends Component {
             <>
                  <Header />
                  <main className="business-main">
-                     <section className="business-analysis"></section>
+                     <section className="business-analysis">
+                        <WordCloud id={this.props.match.params.businessId} />
+                     </section>
                      <section className="business-data">
                             <BusinessComponent business={this.props.business} />
                             <div className="bookmark">
