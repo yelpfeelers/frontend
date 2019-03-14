@@ -11,7 +11,7 @@ const Businesses = props => (
         <Header />
         <main className="businesses-main">
             <section className="businesses-map">
-                <Map coordinates={props.location} />
+                <Map businesses={props.location} />
             </section>
             <section className="businesses-results">
                 {

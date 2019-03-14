@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import people from '../../assets/users-light.svg';
 import clock from '../../assets/clock-light.svg';
-import star from '../../assets/star-light.svg';
+import star from '../../assets/star-light-original.svg';
 import walk from '../../assets/walking-light.svg';
 
 const Flex = styled.section`

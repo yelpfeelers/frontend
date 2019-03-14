@@ -1,6 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import styled from 'styled-components';
+import star from '../../assets/star-solid.svg'
 
 const Div = styled.div`
     height: 100%;
@@ -39,14 +40,31 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      businesses: props.coordinates
+      businesses: []
     };
   }
 
   componentDidMount() {
+    if (this.props.businesses[0]) {
+        this.setState({
+            businesses: this.props.businesses.map(b => (
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                    'type': 'Point',
+                    'coordinates': [
+                        b.longitude,
+                        b.latitude
+                    ]
+                    }
+                }
+            ))
+        })
+    }
+
     let center = [
-        this.props.coordinates[0] === null ? -115.164766837504 : this.props.coordinates[0].longitude,
-        this.props.coordinates[0] === null ? 36.1315942123034 : this.props.coordinates[0].latitude
+        this.props.businesses[0] === null ? -115.164766837504 : this.props.businesses[0].longitude,
+        this.props.businesses[0] === null ? 36.1315942123034 : this.props.businesses[0].latitude
     ];
     this.map = new mapboxgl.Map({
         container: this.mapContainer,
@@ -55,21 +73,32 @@ class Map extends React.Component {
         zoom: 11
     });
 
-    // let businesses = this.state.businesses;
-
-    // this.map.on('load', businesses => {
-    //   this.map.addSource('countries', {
-    //     type: 'geojson',
-    //     businesses
-    //   });
-
-    //   this.map.addLayer({
-    //     id: 'countries',
-    //     type: 'fill',
-    //     source: 'countries'
-    //   }, 'country-label-lg'); // ID metches `mapbox/streets-v9`
-    // });
-  }
+    this.map.on('load', () => {
+        this.map.addLayer({
+            id: 'businesses',
+            type: 'circle',
+            minzoom: 5,
+            source: {
+                type: "geojson",
+                data: {
+                    type: "FeatureCollection",
+                    features: this.state.businesses
+                }
+            },
+            paint: {
+                'circle-stroke-width': 1,
+                'circle-stroke-color': '#fff',
+                'circle-color': '#d32323',
+                'circle-radius': {
+                    stops: [
+                    [10, 5],
+                    [15, 10],
+                    ],
+                },
+            },
+        });
+    });
+}
 
   render() {
       return  (

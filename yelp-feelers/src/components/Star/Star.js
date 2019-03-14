@@ -5,7 +5,7 @@ import starSolid from '../../assets/star-solid.svg'
 
 const Div = styled.div`
     background: ${props => `url(${props.star}) center no-repeat`};
-    background-size: 40px 40px;
+    background-size: 40px 35px;
     cursor: pointer;
     display: inline-block;
     height: 40px;

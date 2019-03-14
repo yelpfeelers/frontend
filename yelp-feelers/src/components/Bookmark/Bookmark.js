@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import Star from '../../components/Star/Star';
-import x from '../../assets/times-light.svg';
+import x from '../../assets/trash-alt-light.svg';
 
 const Article = styled.article`
     background-color: #ffffff;
@@ -26,12 +26,12 @@ const IconContainer = styled.div`
 
 const Icon = styled.div`
     background: url(${x}) center no-repeat;
-    background-size: 40px 40px;
+    background-size: 20px 20px;
     cursor: pointer;
     display: inline-block;
-    height: 15px;
+    height: 20px;
     margin: auto;
-    width: 15px;
+    width: 20px;
 `;
 
 const Header = styled.header`
