@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { deleteBookmark, fetchBookmarks, updateBookmark } from '../../actions';
 import Bookmark from '../../components/Bookmark/Bookmark';
 import Header from '../../components/Header/Header';
-import authHOC from '../../components/auth-HOC/index'
+import authHOC from '../../components/auth-HOC/index';
+
 class Bookmarks extends Component {
   componentDidMount() {
     this.props.fetchBookmarks()

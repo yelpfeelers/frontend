@@ -59,7 +59,6 @@ export const deleteBookmark = id => dispatch => {
 }
 
 export const updateBookmark = bm => dispatch => {
-  console.log(bm, 'here')
   dispatch({ type: UPDATE_BOOKMARKS_REQUEST })
   axiosWithAuth()
     .put(`https://yelpfeelers.herokuapp.com/api/bookmarks/${bm.id}`, bm)
