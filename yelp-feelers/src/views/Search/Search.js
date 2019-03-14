@@ -87,7 +87,15 @@ class Search extends Component {
           </section>
         </div>
         <div className="split">
-          <section className="search-aside"></section>
+          <section className="search-aside">
+            <div className="uvp">
+              <h1>
+                Tacopedia is the surefire way to land the best tacos the first time, every time.  Know what to expect with
+                reviews based on real feelings, not just star ratings.
+              </h1>
+              <p>Powered by Yelp!</p>
+            </div>
+          </section>
         </div>
       </main>
     );
