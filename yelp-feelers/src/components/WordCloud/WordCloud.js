@@ -40,21 +40,36 @@ const Section = styled.section`
     }
 `;
 
-const SubTitle = styled.h1`
+const SubTitle = styled.p`
     font-size: 1.4rem;
     line-height: 1.1;
+`;
+
+const Title = styled.h1`
 `;
 
 const WordCloud = props => (
     <>
         <Section>
             <Article>
+                <Title>Sentiment Analysis</Title>
                 <SubTitle>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    What do reviews really mean?  Our algorithm 
+                    finds the meaning in their words.  We look for sentiment
+                    to determine a user's real perception of a business, and 
+                    help you make informed decisions on your quest for tacos.
+                </SubTitle>
+                <Title>Meet the Word Cloud</Title>
+                <SubTitle>
+                    The Word Cloud uses Sentiment Analysis
+                    to compile key words from user reviews, giving you 
+                    a clearer picture of the goods at a glance. 
+                    The larger the word, the more often it's used.
+                    Green words connote positivity, red words connote negativity.
                 </SubTitle>
             </Article>
             <Container>
-                <Img src={`http://api.mota-analytica.io/wordcloud/${props.id}`} alt={props.id} />
+                {/* <Img src={`http://api.mota-analytica.io/wordcloud/${props.id}`} alt={props.id} /> */}
             </Container>
             
         </Section>
