@@ -24,7 +24,6 @@
             padding: 10px 10px 10px 10px;
 
             button {
-                background-color: #578843;
                 border-radius: 8px;
                 color: white;
                 cursor: pointer;
@@ -34,6 +33,14 @@
                 margin: auto;
                 padding: 5px 20px;
                 letter-spacing: 0.05rem;
+            }
+
+            .bookmark-business {
+                background-color: #578843;
+            }
+
+            .remove-bookmark {
+                background-color: #d32323;
             }
         }
 

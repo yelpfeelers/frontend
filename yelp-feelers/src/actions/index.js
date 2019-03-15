@@ -116,7 +116,8 @@ export const loginUser = creds => dispatch => {
   return axios
     .post('https://yelpfeelers.herokuapp.com/api/users/login', creds)
     .then(res => {
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('token', res.data.token);
+      localStorage.signupUser('username', res.data.user.username);
       dispatch({ type: POST_LOGIN_SUCCESS, payload: res.data.user.username });
       return;
     })
@@ -130,7 +131,8 @@ export const signupUser = creds => dispatch => {
   return axios
     .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
     .then(res => {
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('token', res.data.token);
+      localStorage.signupUser('username', res.data.user.username);
       dispatch({ type: POST_SIGNUP_SUCCESS, payload: res.data.user.username });
       return;
     })

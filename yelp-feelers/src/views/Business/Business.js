@@ -5,7 +5,7 @@ import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
 import WordCloud from '../../components/WordCloud/WordCloud';
-import { bookmarkBusiness, fetchReviews } from '../../actions';
+import { bookmarkBusiness, deleteBookmark, fetchReviews } from '../../actions';
 import './Business.scss';
 
 class Business extends Component {
@@ -25,6 +25,11 @@ class Business extends Component {
 
     bookmarkBusiness = () => {
         this.props.bookmarkBusiness(this.props.business, this.state.rating);
+    }
+
+    removeBookmark = () => {
+        console.log('works')
+        this.props.deleteBookmark(this.props.bookmark);
     }
 
     toggleReviews = () => {
@@ -50,9 +55,10 @@ class Business extends Component {
                                 localStorage.getItem("token") ?
                                 (
                                     <button
-                                        onClick={this.bookmarkBusiness}
+                                        onClick={!this.props.bookmark ? this.bookmarkBusiness : this.removeBookmark}
+                                        className={!this.props.bookmark ? 'bookmark-business' : 'remove-bookmark'}
                                     >
-                                        Bookmark Business
+                                        {!this.props.bookmark ? 'Bookmark Business' : 'Remove Bookmark'}
                                     </button>
                                 ):
                                 (
@@ -100,8 +106,9 @@ class Business extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+    bookmark: state.bookmarks.map(b => b.business_id === props.match.params.businessId ? b.id : null)[0],
     business: state.businesses.filter(b => b.id === props.match.params.businessId)[0],
     isFetching: state.fetchingReviews
 })
 
-export default connect(mapStateToProps, { bookmarkBusiness, fetchReviews })(Business);
+export default connect(mapStateToProps, { bookmarkBusiness, deleteBookmark, fetchReviews })(Business);
