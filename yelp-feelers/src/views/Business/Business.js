@@ -5,6 +5,7 @@ import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
 import WordCloud from '../../components/WordCloud/WordCloud';
+import Unavailable from '../../components/Unavailable/Unavailable';
 import { bookmarkBusiness, deleteBookmark, fetchReviews } from '../../actions';
 import './Business.scss';
 
@@ -46,7 +47,7 @@ class Business extends Component {
                  <Header />
                  {
                      !this.props.business ?
-                     null :
+                     <Unavailable /> :
                     <main className="business-main">
                         <section className="business-analysis">
                             <WordCloud id={this.props.match.params.businessId} />

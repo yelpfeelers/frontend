@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 import Business from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
+import Unavailable from '../../components/Unavailable/Unavailable';
 import './Businesses.scss';
 
 
 const Businesses = props => (
     <>
         <Header />
+        {
+            props.businesses.length < 1 ?
+            <Unavailable /> : null
+        }
         <main className="businesses-main">
             <section className="businesses-map">
                 {
