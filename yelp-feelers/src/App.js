@@ -13,7 +13,8 @@ class App extends Component {
     return (
       <>
         <Route exact path="/" component={Search} />
-        <PrivateRoute path="/bookmarks" component={Bookmarks} />
+        <Route exact path="/bookmarks" component={Bookmarks} />
+        {/* <PrivateRoute path="/bookmarks" component={Bookmarks} /> */}
         <Route exact path="/businesses" component={Businesses} />
         <Route path="/businesses/:businessId" component={Business} />
         <Route path="/account" component={Account} />

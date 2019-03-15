@@ -5,7 +5,7 @@ const Article = styled.article`
     background-color: white;
     border-bottom: 1px solid #cddae2;
     margin-top: 30px;
-    padding: 10px;
+    padding: 10 10px 10px 10px;
 `;
 
 const Container = styled.div`
@@ -46,6 +46,8 @@ const SubTitle = styled.p`
 `;
 
 const Title = styled.h1`
+    font-size: 1.6rem;
+    margin: 10px 0 10px;
 `;
 
 const WordCloud = props => (
@@ -59,12 +61,12 @@ const WordCloud = props => (
                     to determine a user's real perception of a business, and 
                     help you make informed decisions on your quest for tacos.
                 </SubTitle>
+
                 <Title>Meet the Word Cloud</Title>
                 <SubTitle>
-                    The Word Cloud uses Sentiment Analysis
-                    to compile key words from user reviews, giving you 
-                    a clearer picture of the goods at a glance. 
-                    The larger the word, the more often it's used.
+                    Our Word Cloud algorithm provides an overall review
+                    of business at a glance by compiling all user reviews.
+                    The larger the word, the more often it's been used.
                     Green words connote positivity, red words connote negativity.
                 </SubTitle>
             </Article>
