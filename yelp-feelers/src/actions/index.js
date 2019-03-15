@@ -66,7 +66,7 @@ export const updateBookmark = bm => dispatch => {
       dispatch({ type: UPDATE_BOOKMARKS_SUCCESS, payload: res.data.data[0].bookmark })
     })
     .catch(err => {
-      dispatch({ type: UPDATE_BOOKMARKS_FAILURE })
+      dispatch({ type: UPDATE_BOOKMARKS_FAILURE, payload: err.message })
     });
 }
 
@@ -75,7 +75,6 @@ export const fetchBookmarks = () => dispatch => {
   axiosWithAuth()
     .get('https://yelpfeelers.herokuapp.com/api/bookmarks')
     .then(res => {
-      console.log(res);
       dispatch({ type: GET_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
     })
     .catch(err => {
