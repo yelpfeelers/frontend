@@ -63,7 +63,7 @@ class Business extends Component {
                                 ):
                                 (
                                     <Link to="/account">
-                                        <button>Login to add Bookmark</button>
+                                        <button className="bookmark-business">Login to add Bookmark</button>
                                     </Link>
                                     
                                 )
