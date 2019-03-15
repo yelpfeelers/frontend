@@ -11,7 +11,11 @@ const Businesses = props => (
         <Header />
         <main className="businesses-main">
             <section className="businesses-map">
-                <Map businesses={props.location} />
+                {
+                    props.businesses.length > 0 ?
+                    <Map businesses={props.location} /> :
+                    null
+                }
             </section>
             <section className="businesses-results">
                 {
