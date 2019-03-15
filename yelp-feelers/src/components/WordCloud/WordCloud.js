@@ -68,7 +68,7 @@ const WordCloud = props => (
                 <Title>Meet the Word Cloud</Title>
                 <SubTitle>
                     Our Word Cloud algorithm provides an overall review
-                    of business at a glance by compiling all user reviews.
+                    of  abusiness at a glance by compiling all user reviews.
                     The larger the word, the more often it's been used.
                     Green words connote positivity, red words connote negativity.
                 </SubTitle>

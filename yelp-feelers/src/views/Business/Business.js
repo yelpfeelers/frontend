@@ -47,7 +47,7 @@ class Business extends Component {
                             <BusinessComponent business={this.props.business} />
                             <div className="bookmark">
                             {
-                                this.props.isAuth ?
+                                localStorage.getItem("token") ?
                                 (
                                     <button
                                         onClick={this.bookmarkBusiness}
@@ -68,9 +68,15 @@ class Business extends Component {
                             <button
                                 onClick={this.toggleReviews}
                             >
-                               Display {this.state.truthy ? 'original' :  'adjusted'} reviews
+                                {
+                                    this.props.isFetching ?
+                                    'Loading reviews' :
+                                    `Display ${this.state.truthy ? 'original' :  'adjusted'} reviews`
+                                }
                             </button>
                             {
+                                this.props.isFetching ?
+                                <div className="spinner" /> :
                                 this.state.reviews.map((review, i) => (
                                     <Review
                                     key={i}
@@ -95,7 +101,7 @@ class Business extends Component {
 
 const mapStateToProps = (state, props) => ({
     business: state.businesses.filter(b => b.id === props.match.params.businessId)[0],
-    isAuth: state.isAuth
+    isFetching: state.fetchingReviews
 })
 
 export default connect(mapStateToProps, { bookmarkBusiness, fetchReviews })(Business);

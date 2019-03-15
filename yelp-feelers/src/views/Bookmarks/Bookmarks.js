@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteBookmark, fetchBookmarks, updateBookmark } from '../../actions';
 import Bookmark from '../../components/Bookmark/Bookmark';
-import Header from '../../components/Header/Header';
+import BookmarksHeader from '../../components/BookmarksHeader/BookmarksHeader';
 import authHOC from '../../components/auth-HOC/';
 
 class Bookmarks extends Component {
@@ -21,7 +21,7 @@ class Bookmarks extends Component {
   render() {
     return (
       <>
-        <Header />
+        <BookmarksHeader />
         <main className="bookmarks-main">
           <section className="bookmarks-map"></section>
           <section className="bookmarks-results">
