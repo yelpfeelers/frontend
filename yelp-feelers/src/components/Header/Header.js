@@ -49,6 +49,14 @@ const Title = styled.h1`
     font-weigth: 200;
 `;
 
+const SubTitle = styled.h2`
+    color: #ffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    font-weigth: 200;
+    margin-right: 10px;
+`;
+
 const Header = props => (
     <MainHeader>
         <Nav>
@@ -67,9 +75,16 @@ const Header = props => (
                 </Link>
             </Div>
             <Div>
-                <Link to="/bookmarks">
-                    <Icon icon={bookmark} />
-                </Link>
+                <Div>
+                    <SubTitle>
+                        {
+                            localStorage.getItem('username')
+                        }
+                    </SubTitle>
+                    <Link to="/bookmarks">
+                        <Icon icon={bookmark} />
+                    </Link>
+                </Div>
             </Div>
         </Nav>
     </MainHeader>
