@@ -105,7 +105,7 @@ export default (state = initialState, action) => {
             }
         case GET_REVIEWS_REQUEST:
             return {
-                ...state, error: null, fetchingReviews: false
+                ...state, error: null, fetchingReviews: true
             }
         case GET_REVIEWS_SUCCESS:
             return {

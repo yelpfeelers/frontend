@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const Article = styled.article`
     background-color: white;
     border-bottom: 1px solid #cddae2;
+    display: block;
     margin-top: 30px;
-    padding: 10 10px 10px 10px;
+    padding-bottom: 10px;
 `;
 
 const Container = styled.div`
@@ -43,11 +44,13 @@ const Section = styled.section`
 const SubTitle = styled.p`
     font-size: 1.4rem;
     line-height: 1.1;
+    margin: 0px 10px;
 `;
 
 const Title = styled.h1`
     font-size: 1.6rem;
-    margin: 10px 0 10px;
+    margin: 0px 10px 10px;
+    padding-top: 10px;
 `;
 
 const WordCloud = props => (

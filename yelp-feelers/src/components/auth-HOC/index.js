@@ -1,16 +1,4 @@
-import React, { Component } from "react";
-import axios from "axios";
-
-axios.interceptors.request.use(
-  function (options) {
-    options.headers.authorization = localStorage.getItem("token");
-
-    return options;
-  },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
+import React from "react";
 
 const privateRoute = Component => {
   return class Authenticated extends Component {
