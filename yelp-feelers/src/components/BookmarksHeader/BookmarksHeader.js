@@ -49,14 +49,15 @@ const Title = styled.h1`
     font-weigth: 200;
 `;
 
-const Header = props => (
+const BookmarksHeader = () => (
     <MainHeader>
         <Nav>
             <Div>
-                <Icon
-                    onClick={props.history.goBack}
-                    icon={back}
-                />
+                <Link to="/businesses">
+                    <Icon
+                        icon={back}
+                    />
+                </Link>
             </Div>
             <Div>
                 <Link to="/">
@@ -75,4 +76,4 @@ const Header = props => (
     </MainHeader>
 )
 
-export default withRouter(Header);
+export default withRouter(BookmarksHeader);

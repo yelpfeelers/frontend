@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import people from '../../assets/users-light.svg';
 import clock from '../../assets/clock-light.svg';
 import star from '../../assets/star-light-original.svg';
-import walk from '../../assets/walking-light.svg';
+import walk from '../../assets/car-light.svg';
 
 const Flex = styled.section`
     display: flex;
@@ -64,6 +64,13 @@ const IconText = styled.p`
     padding-top: 10px;
 `;
 
+const calculateTravelTime = dis => {
+    // A car at 60km travels 16.6667m per second.
+    let time = (dis / 16.6667) / 60;
+    // Divide distance in seconds by 60 to calculate distance in minutes.
+    return Math.ceil(time)
+}
+
 
 const Business = props => (
     <Grid>
@@ -82,7 +89,7 @@ const Business = props => (
         <Flex justify={'space-around'} maxWidth={'400px'} bottom={'10px'}>
             <Div>
                 <Icon icon={walk} />
-                <IconText>5 mins</IconText>
+                <IconText>{calculateTravelTime(props.business.distance)} mins</IconText>
             </Div>
             <Div>
                 <Icon icon={clock}></Icon>
