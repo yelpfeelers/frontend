@@ -57,7 +57,7 @@ const WordCloud = props => (
     <>
         <Section>
             <Article>
-                <Title>Sentiment Analysis</Title>
+                <Title>Display Adjusted Reviews</Title>
                 <SubTitle>
                     What do reviews really mean?  Our algorithm 
                     finds the meaning in their words.  We look for sentiment

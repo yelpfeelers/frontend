@@ -49,6 +49,7 @@ const Img = styled.img`
 const Title = styled.h1`
     color: black;
     font-size: 2rem;
+    margin-left: 10px;
 `;
 
 const Section = styled.section`

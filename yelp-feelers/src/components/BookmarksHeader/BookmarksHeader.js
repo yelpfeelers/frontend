@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import bookmark from '../../assets/bookmark.svg';
+import signout from '../../assets/sign-out-alt-light.svg';
 import yelp from '../../assets/Yelp_trademark_RGB.png';
 import back from '../../assets/chevron.svg';
 
@@ -30,6 +30,15 @@ const Icon = styled.div`
     width: 25px;
 `;
 
+const Exit = styled.div`
+    background: ${props => `url(${props.icon}) center no-repeat`}
+    background-size: 25px;
+    cursor: pointer;
+    height: 25px;
+    margin: auto;
+    width: 25px;
+`;
+
 const Div = styled.div`
     display: flex;
     align-items: center;
@@ -49,7 +58,7 @@ const Title = styled.h1`
     font-weigth: 200;
 `;
 
-const BookmarksHeader = () => (
+const BookmarksHeader = props => (
     <MainHeader>
         <Nav>
             <Div>
@@ -68,9 +77,14 @@ const BookmarksHeader = () => (
                 </Link>
             </Div>
             <Div>
-                <Link to="/bookmarks">
-                    <Icon icon={bookmark} />
-                </Link>
+                <Exit
+                    icon={signout}
+                    onClick={() => {
+                        localStorage.removeItem('token')
+                        localStorage.removeItem('username')
+                        props.history.push('/')
+                    }}
+                />
             </Div>
         </Nav>
     </MainHeader>
