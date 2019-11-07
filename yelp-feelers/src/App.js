@@ -13,7 +13,7 @@ class App extends Component {
       <>
         <Route exact path="/" component={Search} />
         <Route exact path="/bookmarks" component={Bookmarks} />
-        <Route exact path="/businesses" component={Businesses} />
+        <Route exact path="/results" component={Businesses} />
         <Route path="/businesses/:businessId" component={Business} />
         <Route path="/account" component={Account} />
       </>
