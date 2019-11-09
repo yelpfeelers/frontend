@@ -31,11 +31,7 @@ class Results extends Component {
                 }
                 <main className="businesses-main">
                     <section className="businesses-map">
-                        {
-                            this.props.businesses.length > 0 ?
-                            <Map businesses={this.props.businesses} /> :
-                            null
-                        }
+                        <Map />
                     </section>
                     <section className="businesses-results">
                         {
