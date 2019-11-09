@@ -35,35 +35,27 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYzg3IiwiYSI6ImNqZnR3dDZjZTBvbTgzM3FqODFkbXZ4d
 class Map extends React.Component {
   map;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      businesses: []
-    };
-  }
-
   componentDidMount() {
-    if (this.props.businesses[0]) {
-        this.setState({
-            businesses: this.props.businesses.map(b => (
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                    'type': 'Point',
-                    'coordinates': [
-                        b.longitude,
-                        b.latitude
-                    ]
-                    }
-                }
-            ))
-        })
-    }
+    const features = (
+      this.props.businesses.map(b => ({
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [ b.longitude, b.latitude ]
+        }
+      }))
+    );
+
+    console.log(this.props.businesses)
+    
+    
+    
 
     let center = [
-        this.props.businesses[0] === null ? -115.164766837504 : this.props.businesses[0].longitude,
-        this.props.businesses[0] === null ? 36.1315942123034 : this.props.businesses[0].latitude
+        this.props.businesses[0].coordinates.latitude === null ? -115.164766837504 : this.props.businesses[0].coordinates.latitude,
+        this.props.businesses[0].coordinates.longitude === null ? 36.1315942123034 : this.props.businesses[0].coordinates.longitude
     ];
+
     this.map = new mapboxgl.Map({
         container: this.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v9',
@@ -80,7 +72,7 @@ class Map extends React.Component {
                 type: "geojson",
                 data: {
                     type: "FeatureCollection",
-                    features: this.state.businesses
+                    features,
                 }
             },
             paint: {

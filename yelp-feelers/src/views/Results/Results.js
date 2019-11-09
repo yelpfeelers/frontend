@@ -7,19 +7,20 @@ import Business from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
 import Unavailable from '../../components/Unavailable/Unavailable';
-import './Businesses.scss';
+import './Results.scss';
 
 
 class Results extends Component {
     componentDidMount() {
-        const values = queryString.parse(this.props.location.search)
-        console.log(values)
-
-        // this.props.locationSearch(this.state.location)
-        //   .then(() => {
-        //     this.props.history.push('/businesses');
-        //   })
+        const { location } = queryString.parse(this.props.location.search)
+        if (location) {
+            this.props.locationSearch(location)
+        } else {
+            this.props.history.push('/');
+        }
+        
     }
+    
     render() {
         return (
             <>
@@ -32,7 +33,7 @@ class Results extends Component {
                     <section className="businesses-map">
                         {
                             this.props.businesses.length > 0 ?
-                            <Map businesses={this.props.location} /> :
+                            <Map businesses={this.props.businesses} /> :
                             null
                         }
                     </section>
@@ -51,8 +52,7 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-    businesses: state.businesses,
-    location: state.businesses.map(b => b.coordinates ? b.coordinates : null)
+    businesses: state.businesses
 });
 
 export default connect(mapStateToProps, { locationSearch })(withRouter(Results));

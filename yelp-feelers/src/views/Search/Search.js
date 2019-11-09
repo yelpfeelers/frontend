@@ -56,9 +56,8 @@ class Search extends Component {
 
   submit = e => {
     e.preventDefault();
-    this.props.history.push(`/results?locaton=${this.state.location}`);
+    this.props.history.push(`results?location=${this.state.location}`);
     this.setState({ location: '' });
-    
   }
 
   render() {
