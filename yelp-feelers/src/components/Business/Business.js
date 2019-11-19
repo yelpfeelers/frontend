@@ -75,11 +75,11 @@ const calculateTravelTime = dis => {
 const Business = props => (
     <Grid>
         <Flex justify={'flex-start'} bottom={'20px'}>
-            <Link to={`/businesses/${props.business.id}`}>
+            <Link to={`/business/${props.business.id}`}>
                 <Image src={props.business.image_url} />
             </Link>
             <Section>
-                <Link to={`/businesses/${props.business.id}`}>
+                <Link to={`/business/${props.business.id}`}>
                     <Title>{props.business.name}</Title>
                 </Link>
                 <SubTitle>{props.business.location.display_address.filter(x => x.length > 0).join(', ')}</SubTitle>

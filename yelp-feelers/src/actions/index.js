@@ -85,11 +85,12 @@ export const fetchBookmarks = () => dispatch => {
 export const fetchReviews = id => dispatch => {
   dispatch({ type: GET_REVIEWS_REQUEST });
   return axios
-      .get(`https://api.mota-analytica.io/business/${id}`)
+      .get(`${process.env.REACT_APP_URL}/api/yelp/${id}`)
       .then(res =>  {
           dispatch({ type: GET_REVIEWS_SUCCESS });
-          if (res.data.result) {
-              return res.data.result
+          console.log(res.data)
+          if (res.data.reviews) {
+              return res.data.reviews
           } else {
               return [];
           }
@@ -99,18 +100,22 @@ export const fetchReviews = id => dispatch => {
       });
 }
 
+// -------------- DONE -----------------
+
 export const locationSearch = location => dispatch => {
   dispatch({ type: GET_LOCATION_REQUEST });
   return axios
-    .get(`${process.env.REACT_APP_URL}/api/yelp?location=${location}&term=taco`)
+    .get(`${process.env.REACT_APP_URL}/api/yelp?location=${location}`)
     .then(res => {
-      dispatch({ type: GET_LOCATION_SUCCESS, payload: res.data });
+      dispatch({ type: GET_LOCATION_SUCCESS, payload: res.data.businesses });
     })
     .catch(err => {
       console.log(err)
       dispatch({ type: GET_LOCATION_FAILURE, payload: err.message });
     });
 }
+
+// -------------------------------------
 
 export const loginUser = creds => dispatch => {
   dispatch({ type: POST_LOGIN_REQUEST });
