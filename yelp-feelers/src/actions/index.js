@@ -37,7 +37,7 @@ export const bookmarkBusiness = (business, rating) => dispatch => {
   dispatch({ type: POST_BOOKMARK_REQUEST })
 
   axiosWithAuth()
-    .post('https://yelpfeelers.herokuapp.com/api/bookmarks', payload)
+    .post(`${process.env.REACT_APP_URL}/api/bookmarks`, payload)
     .then(res => {
       dispatch({ type: POST_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
     })
@@ -49,7 +49,7 @@ export const bookmarkBusiness = (business, rating) => dispatch => {
 export const deleteBookmark = id => dispatch => {
   dispatch({ type: DELETE_BOOKMARK_REQUEST });
   axiosWithAuth()
-    .delete(`https://yelpfeelers.herokuapp.com/api/bookmarks/${id}`)
+    .delete(`${process.env.REACT_APP_URL}/api/bookmarks/${id}`)
     .then(res => {
       dispatch({ type: DELETE_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
     })
@@ -61,7 +61,7 @@ export const deleteBookmark = id => dispatch => {
 export const updateBookmark = bm => dispatch => {
   dispatch({ type: UPDATE_BOOKMARKS_REQUEST })
   axiosWithAuth()
-    .put(`https://yelpfeelers.herokuapp.com/api/bookmarks/${bm.id}`, bm)
+    .put(`${process.env.REACT_APP_URL}/api/bookmarks/${bm.id}`, bm)
     .then(res => {
       dispatch({ type: UPDATE_BOOKMARKS_SUCCESS, payload: res.data.data[0].bookmark })
     })
@@ -73,7 +73,7 @@ export const updateBookmark = bm => dispatch => {
 export const fetchBookmarks = () => dispatch => {
   dispatch({ type: GET_BOOKMARK_REQUEST })
   axiosWithAuth()
-    .get('https://yelpfeelers.herokuapp.com/api/bookmarks')
+    .get(`${process.env.REACT_APP_URL}/api/bookmarks`)
     .then(res => {
       dispatch({ type: GET_BOOKMARK_SUCCESS, payload: res.data.data[0].bookmark })
     })
@@ -85,11 +85,12 @@ export const fetchBookmarks = () => dispatch => {
 export const fetchReviews = id => dispatch => {
   dispatch({ type: GET_REVIEWS_REQUEST });
   return axios
-      .get(`https://api.mota-analytica.io/business/${id}`)
+      .get(`${process.env.REACT_APP_URL}/api/yelp/${id}`)
       .then(res =>  {
           dispatch({ type: GET_REVIEWS_SUCCESS });
-          if (res.data.result) {
-              return res.data.result
+          console.log(res.data)
+          if (res.data.reviews) {
+              return res.data.reviews
           } else {
               return [];
           }
@@ -99,22 +100,27 @@ export const fetchReviews = id => dispatch => {
       });
 }
 
+// -------------- DONE -----------------
+
 export const locationSearch = location => dispatch => {
   dispatch({ type: GET_LOCATION_REQUEST });
   return axios
-    .get(`https://yelpfeelers.herokuapp.com/api/yelp?location=${location}&term=taco`)
+    .get(`${process.env.REACT_APP_URL}/api/yelp?location=${location}`)
     .then(res => {
-      dispatch({ type: GET_LOCATION_SUCCESS, payload: res.data });
+      dispatch({ type: GET_LOCATION_SUCCESS, payload: res.data.businesses });
     })
     .catch(err => {
+      console.log(err)
       dispatch({ type: GET_LOCATION_FAILURE, payload: err.message });
     });
 }
 
+// -------------------------------------
+
 export const loginUser = creds => dispatch => {
   dispatch({ type: POST_LOGIN_REQUEST });
   return axios
-    .post('https://yelpfeelers.herokuapp.com/api/users/login', creds)
+    .post(`${process.env.REACT_APP_URL}/api/users/login`, creds)
     .then(res => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('username', res.data.user.username);
@@ -129,7 +135,7 @@ export const loginUser = creds => dispatch => {
 export const signupUser = creds => dispatch => {
   dispatch({ type: POST_SIGNUP_REQUEST });
   return axios
-    .post('https://yelpfeelers.herokuapp.com/api/users/register', creds)
+    .post(`${process.env.REACT_APP_URL}/api/users/register`, creds)
     .then(res => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('username', res.data.user.username);

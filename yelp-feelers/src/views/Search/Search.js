@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { locationSearch } from '../../actions';
 import styled from 'styled-components';
 import './Search.scss';
 
@@ -57,10 +56,7 @@ class Search extends Component {
 
   submit = e => {
     e.preventDefault();
-    this.props.locationSearch(this.state.location)
-      .then(() => {
-        this.props.history.push('/businesses');
-      })
+    this.props.history.push(`results?location=${this.state.location}`);
     this.setState({ location: '' });
   }
 
@@ -102,4 +98,4 @@ class Search extends Component {
   }
 }
 
-export default connect(null, { locationSearch })(Search);
+export default connect(null)(Search);

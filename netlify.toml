@@ -1,0 +1,4 @@
+[build]
+base = "yelp-feelers/"
+publish = "yelp-feelers/build/"
+command = "yarn build"
